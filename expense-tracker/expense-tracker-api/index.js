@@ -1,1 +1,4 @@
-console.log("expense-tracker api");
+function sum(a, b) {
+    return a + b;
+  }
+  module.exports = sum;
