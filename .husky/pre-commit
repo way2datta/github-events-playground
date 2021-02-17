@@ -4,8 +4,8 @@
 filesToCommit=`git diff --name-only --staged`
 echo $filesToCommit
 
-declare -A appsCommands=( ["expense-tracker-api"]="run et-api" ["expense-tracker-ui"]="run et-ui")
-apps=("expense-tracker-api" "expense-tracker-ui")
+declare -A appsCommands=( ["expense-tracker-api"]="test-et-api" ["expense-tracker-ui"]="test-et-ui"  ["todos-ui"]="test-todo-ui"  ["todos-api"]="test-todo-api")
+apps=("expense-tracker-api" "expense-tracker-ui","todos-api"."todos-ui")
 
 # for loop 
 for fileToCommit in $filesToCommit

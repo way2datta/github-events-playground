@@ -10,10 +10,10 @@
   },
   "scripts": {
     "test": "jest",
-    "test-et-ui": "jest",
-    "test-et-api": "jest",
-    "test-todo-ui": "jest",
-    "test-todo-api": "jest"
+    "test-et-ui": ".\\node_modules\\.bin\\jest  --rootDir .\\expense-tracker\\expense-tracker-ui\\",
+    "test-et-api": ".\\node_modules\\.bin\\jest  --rootDir .\\expense-tracker\\expense-tracker-api\\",
+    "test-todo-ui": ".\\node_modules\\.bin\\jest  --rootDir .\\todos\\todos-ui\\",
+    "test-todo-api": ".\\node_modules\\.bin\\jest  --rootDir .\\todos\\todos-api\\"
   },
   "repository": {
     "type": "git",
