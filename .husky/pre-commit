@@ -2,11 +2,12 @@
 . "$(dirname "$0")/_/husky.sh"
 
 filesToCommit=`git diff --name-only --staged`
-echo $filesToCommit
+# echo $filesToCommit
 
 declare -A appsCommands=( ["expense-tracker-api"]="test-et-api" ["expense-tracker-ui"]="test-et-ui"  ["todos-ui"]="test-todo-ui"  ["todos-api"]="test-todo-api")
 apps=("expense-tracker-api" "expense-tracker-ui","todos-api"."todos-ui")
 
+commandsToExecute=()
 # for loop 
 for fileToCommit in $filesToCommit
 do
@@ -23,18 +24,18 @@ do
     done;
 
     appThatHasCodeChanges=${folderInFileToCommit[1]}
-    echo $appThatHasCodeChanges
+    # echo $appThatHasCodeChanges
 
 
    if [[ "\t${apps[@]}\t"=~"\t${appThatHasCodeChanges}\t"  ]]; then
-        echo "true"
-    else
-        echo "false"
+        commandsToExecute+=( ${appsCommands[$appThatHasCodeChanges]} )
+    # else
+    #     echo "false"
     fi
 done
 
 # detect test command 
 
 # execute test command 
-
+echo $commandsToExecute
 npm test
