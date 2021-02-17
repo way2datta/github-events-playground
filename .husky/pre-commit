@@ -1,4 +1,40 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+filesToCommit=`git diff --name-only --staged`
+echo $filesToCommit
+
+declare -A appsCommands=( ["expense-tracker-api"]="run et-api" ["expense-tracker-ui"]="run et-ui")
+apps=("expense-tracker-api" "expense-tracker-ui")
+
+# for loop 
+for fileToCommit in $filesToCommit
+do
+#    echo $fileToCommit
+    dirnames=`dirname "$fileToCommit"`
+    filename=`basename "$fileToCommit"`
+
+    directorySeparator=/
+    s=$fileToCommit$directorySeparator
+    folderInFileToCommit=();
+    while [[ $s ]]; do
+    folderInFileToCommit+=( "${s%%"$directorySeparator"*}" );
+    s=${s#*"$directorySeparator"};
+    done;
+
+    appThatHasCodeChanges=${folderInFileToCommit[1]}
+    echo $appThatHasCodeChanges
+
+
+   if [[ "\t${apps[@]}\t"=~"\t${appThatHasCodeChanges}\t"  ]]; then
+        echo "true"
+    else
+        echo "false"
+    fi
+done
+
+# detect test command 
+
+# execute test command 
+
 npm test
