@@ -4,14 +4,13 @@
 filesToCommit=`git diff --name-only --staged`
 # echo $filesToCommit
 
-declare -A appsCommands=( ["expense-tracker-api"]="test-et-api" ["expense-tracker-ui"]="test-et-ui"  ["todos-ui"]="test-todo-ui"  ["todos-api"]="test-todo-api")
+declare -A appsCommands=( ["expense-tracker-api"]="test-et-api" ["expense-tracker-ui"]="test-et-ui"  ["todos-ui"]="test-todo-ui"  ["todos-api"]="test-todo-api" )
 apps=("expense-tracker-api" "expense-tracker-ui","todos-api"."todos-ui")
-
 commandsToExecute=()
-# for loop 
+
+
 for fileToCommit in $filesToCommit
 do
-#    echo $fileToCommit
     dirnames=`dirname "$fileToCommit"`
     filename=`basename "$fileToCommit"`
 
@@ -24,18 +23,14 @@ do
     done;
 
     appThatHasCodeChanges=${folderInFileToCommit[1]}
-    # echo $appThatHasCodeChanges
-
 
    if [[ "\t${apps[@]}\t"=~"\t${appThatHasCodeChanges}\t"  ]]; then
-        commandsToExecute+=( ${appsCommands[$appThatHasCodeChanges]} )
-    # else
-    #     echo "false"
+        testCommand=${appsCommands[$appThatHasCodeChanges]}
+        commandsToExecute+=( $testCommand )
     fi
 done
 
-# detect test command 
-
-# execute test command 
-echo $commandsToExecute
-npm test
+echo vingarium laviosa 
+for index in "${!commandsToExecute[@]}"; do 
+npm run ${commandsToExecute[$index]}; 
+done
